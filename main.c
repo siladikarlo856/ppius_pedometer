@@ -1,6 +1,5 @@
 #include "main.h"
 
-
 BLE_NUS_DEF(m_nus, NRF_SDH_BLE_TOTAL_LINK_COUNT); 									/**< BLE NUS service instance. */
 NRF_BLE_GATT_DEF(m_gatt);                                           /**< GATT module instance. */
 NRF_BLE_QWR_DEF(m_qwr);                                             /**< Context for the Queued Write module.*/
@@ -26,6 +25,10 @@ TimerHandle_t led_toggle_timer_handle;  /**< Reference to LED1 toggling FreeRTOS
 TaskHandle_t temperature_task_handle;
 TaskHandle_t accel_task_handle;
 TaskHandle_t pedo_task_handle;
+
+// screen number to show on display
+uint8_t screen_number = 0;
+
 
 /**@brief Callback function for asserts in the SoftDevice.
  *
@@ -109,11 +112,6 @@ static void gap_params_init(void)
     err_code = sd_ble_gap_ppcp_set(&gap_conn_params);
     APP_ERROR_CHECK(err_code);
 }
-
-
-
-
-
 
 /**@brief Function for handling the Connection Parameters Module.
  *
@@ -474,11 +472,8 @@ static void buttons_leds_init(bool * p_erase_bonds)
     ret_code_t err_code;
     bsp_event_t startup_event;
 
-    err_code = bsp_init(BSP_INIT_LEDS | BSP_INIT_BUTTONS, bsp_event_handler);
-    APP_ERROR_CHECK(err_code);
-
-    err_code = bsp_btn_ble_init(NULL, &startup_event);
-    APP_ERROR_CHECK(err_code);
+		nrf_gpio_cfg_output(BLUE_LED);
+		nrf_gpio_pin_set(BLUE_LED);
 
     *p_erase_bonds = (startup_event == BSP_EVENT_CLEAR_BONDING_DATA);
 }
@@ -743,17 +738,6 @@ uint32_t nus_printf_callback(char p_char)
 	return err_code;
 }
 
-/**@brief The function to call when the LED1 FreeRTOS timer expires.
- *
- * @param[in] pvParameter   Pointer that will be used as the parameter for the timer.
- */
-static void led_toggle_timer_callback (void * pvParameter)
-{
-    UNUSED_PARAMETER(pvParameter);
-    bsp_board_led_invert(BSP_BOARD_LED_3);
-		printf("test %f\r\n", 11.45);
-}
-
 /**@brief pedo task entry function.
  *
  * @param[in] pvParameter   Pointer that will be used as the parameter for the task.
@@ -772,7 +756,6 @@ static void pedo_task_function (void * pvParameter)
 		{
 			printf("Steps taken: %d\r\n", steps);
 		}
-		
 		
 		/* Delay a task for a given number of ticks */
 		vTaskDelay(APP_TIMER_TICKS(PEDO_TASK_DELAY));
@@ -801,7 +784,13 @@ static void temperature_task_function (void * pvParameter)
 		{
 			printf("Current temperature: %.2f\r\n", temp);
 		}
-
+		
+		// TODO remove!!!
+		/**************************************************/
+		uint8_t data;
+		readRegister(&data, LSM6DS3_ACC_GYRO_D6D_SRC);
+    /**************************************************/
+		
 		/* Delay a task for a given number of ticks */
 		vTaskDelay(APP_TIMER_TICKS(TEMPERATURE_TASK_DELAY));
 	}
@@ -816,6 +805,7 @@ static void accel_task_function (void * pvParameter)
 	float average_accel;
 	float accel_x, accel_y, accel_z, total;
 	uint16_t steps_taken = 0;
+	uint16_t last_steps_taken = 0;
 	
 	average_accel = get_avg_accel();
 	
@@ -826,8 +816,12 @@ static void accel_task_function (void * pvParameter)
 		accel_z = readFloatAccel(IMU_ACCEL_Z);
 		total = sqrt(pow(accel_x, 2) + pow(accel_y, 2) + pow(accel_z, 2));
 		if (detect_step(total))
+		{
+			last_steps_taken = steps_taken;
 			steps_taken++;
-		
+			printf("Steps: %d\r\n", steps_taken);
+		}
+			
 		SEGGER_RTT_WriteString(0, "Total acceleration: ");
 		print_float(total - average_accel);
 		SEGGER_RTT_WriteString(0, " --- Steps: ");
@@ -838,13 +832,28 @@ static void accel_task_function (void * pvParameter)
 		
 		if(bt_connected)
 		{
-			printf("Total acceleration:  %.2f\r\n", total - average_accel);
-			printf("Steps: %d\r\n", steps_taken);
+			//printf("Steps: %d\r\n", steps_taken);
 		}
 
 		/* Delay a task for a given number of ticks */
 		vTaskDelay(APP_TIMER_TICKS(ACCEL_TASK_DELAY));
 	}
+}
+
+void int_1_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action)
+{
+    screen_number++;
+		screen_number%=MAX_SCREEN_NUMBER;
+		NRF_LOG_INFO("In1 num: %d", screen_number);
+		NRF_LOG_FLUSH();
+}
+
+void int_2_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action)
+{
+    screen_number++;
+		screen_number%=MAX_SCREEN_NUMBER;
+		NRF_LOG_INFO("Int 2 num: %d", screen_number);
+		NRF_LOG_FLUSH();
 }
 
 /**@brief Function for application main entry.
@@ -877,6 +886,28 @@ int main(void)
     // Initialize modules.
     timers_init();
     buttons_leds_init(&erase_bonds);
+		/******************* Initialize I2C interface *******************/
+		I2C_Init(SCL_PIN, SDA_PIN);
+		
+		ret_code_t err_code;
+
+    err_code = nrf_drv_gpiote_init();
+    APP_ERROR_CHECK(err_code);
+		
+		nrf_drv_gpiote_in_config_t in_config = GPIOTE_CONFIG_IN_SENSE_LOTOHI(true);
+    in_config.pull = NRF_GPIO_PIN_PULLUP;
+
+    err_code = nrf_drv_gpiote_in_init(PIN_INT_1, &in_config, int_1_handler);
+    APP_ERROR_CHECK(err_code);
+		err_code = nrf_drv_gpiote_in_init(PIN_INT_2, &in_config, int_2_handler);
+    APP_ERROR_CHECK(err_code);
+
+    nrf_drv_gpiote_in_event_enable(PIN_INT_1, true);
+		nrf_drv_gpiote_in_event_enable(PIN_INT_2, true);
+   
+		
+		NRF_LOG_INFO("TWI init... DONE!");
+		
     gap_params_init();
     gatt_init();
     advertising_init();
@@ -885,20 +916,25 @@ int main(void)
     peer_manager_init();
 		//uart_init();
 		
-			/******************* Initialize I2C interface *******************/
-		I2C_Init(12, 11);
-		NRF_LOG_INFO("TWI init... DONE!");
+			
+		
+		
 		
 		/*********************** Initialize IMU *************************/
 		NRF_LOG_INFO("IMU init...");
 		IMU_Init();
-		IMU_Init_HW_Tap();
 		IMU_Init_Orient();
-		IMU_Init_Pedo();
+		IMU_Init_HW_Tap();
+    
+//		IMU_Init_Pedo();
+
+
+		
 		NRF_LOG_INFO("DONE!\r\n");
 		NRF_LOG_INFO("Calibrating IMU...");
 		calibrate_IMU();
 		NRF_LOG_INFO("DONE!\r\n");
+		
 	
 //		uint8_t data;
 //		data = I2C_Read(IMU_I2C_ADDRESS, LSM6DS3_ACC_GYRO_WHO_AM_I_REG);
@@ -907,9 +943,9 @@ int main(void)
 
 		
 
-  	//UNUSED_VARIABLE(xTaskCreate(temperature_task_function, "TMPT", 256, NULL, 3, &temperature_task_handle));
-		UNUSED_VARIABLE(xTaskCreate(accel_task_function, "ACCEL", 256, NULL, 3, &accel_task_handle));
-		//UNUSED_VARIABLE(xTaskCreate(pedo_task_function, "pedo", configMINIMAL_STACK_SIZE, NULL, 3, &pedo_task_handle));
+  	UNUSED_VARIABLE(xTaskCreate(temperature_task_function, "TMPT", 256, NULL, 3, &temperature_task_handle));
+//		UNUSED_VARIABLE(xTaskCreate(accel_task_function, "ACCEL", 256, NULL, 3, &accel_task_handle));
+//		UNUSED_VARIABLE(xTaskCreate(pedo_task_function, "pedo", configMINIMAL_STACK_SIZE, NULL, 3, &pedo_task_handle));
 
     
 		// Create a FreeRTOS task for the BLE stack.

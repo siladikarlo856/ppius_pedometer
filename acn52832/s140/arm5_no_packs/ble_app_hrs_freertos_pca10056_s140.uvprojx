@@ -392,6 +392,26 @@
               <FileType>5</FileType>
               <FilePath>..\config\sdk_config.h</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Config</GroupName>
+          <Files>
+            <File>
+              <FileName>addresses.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\src\addresses.h</FilePath>
+            </File>
+            <File>
+              <FileName>configuration.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\src\configuration.h</FilePath>
+            </File>
+            <File>
+              <FileName>pin_definitions.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\src\pin_definitions.h</FilePath>
+            </File>
             <File>
               <FileName>main.h</FileName>
               <FileType>5</FileType>
@@ -5392,6 +5412,26 @@
               <FileName>sdk_config.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\config\sdk_config.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Config</GroupName>
+          <Files>
+            <File>
+              <FileName>addresses.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\src\addresses.h</FilePath>
+            </File>
+            <File>
+              <FileName>configuration.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\src\configuration.h</FilePath>
+            </File>
+            <File>
+              <FileName>pin_definitions.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\src\pin_definitions.h</FilePath>
             </File>
             <File>
               <FileName>main.h</FileName>

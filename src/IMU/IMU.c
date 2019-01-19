@@ -252,7 +252,7 @@ void IMU_Init_HW_Tap(void)
 	
 	// Single and double tap interrupt driven to INT1 pin -- enable latch
 	readRegister(&data, LSM6DS3_ACC_GYRO_MD1_CFG);
-	data |= INT1_SINGLE_TAP | INT1_DOUBLE_TAP;
+	data |= INT1_SINGLE_TAP;// | INT1_DOUBLE_TAP;
 	errorAccumulator += writeRegister( LSM6DS3_ACC_GYRO_MD1_CFG, data );
 }
 
@@ -273,7 +273,8 @@ void IMU_Init_Orient(void)
 	
 	//Enable LPF2 filter and latch interrupt
 	readRegister(&data, LSM6DS3_ACC_GYRO_TAP_CFG1);
-	data |= 0x11;
+	//data |= 0x11;
+	data |= 0x10;
 	writeRegister(LSM6DS3_ACC_GYRO_TAP_CFG1, data);
 	
 	//Apply LPF2 filter to 6D function

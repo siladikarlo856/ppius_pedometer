@@ -4,23 +4,14 @@
 #include "boards.h"
 
 /* PIN definitions */
-#define ARDUINO_SHIELD_SCL_PIN 31
-#define ARDUINO_SHIELD_SDA_PIN 30
+#define SCL_PIN 		12
+#define SDA_PIN 		11
 
-// PIN_IN_1 - ARDUINO_2_PIN
-#ifdef ARDUINO_2_PIN
-    #define PIN_IN_1 ARDUINO_2_PIN
-#endif
-#ifndef PIN_IN_1
-    #error "Please indicate input pin"
-#endif
-// PIN_IN_2 - ARDUINO_3_PIN
-#ifdef ARDUINO_3_PIN
-		#define PIN_IN_2 ARDUINO_3_PIN
-#endif
-#ifndef PIN_IN_2
-    #error "Please indicate input pin"
-#endif
+#define PIN_INT_1 	14
+#define PIN_INT_2 	7
+
+#define BLUE_LED		23
+
 // PIN_OUT_1 BSP_LED_0
 #ifdef BSP_LED_0
     #define PIN_OUT_1 BSP_LED_0
