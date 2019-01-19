@@ -247,12 +247,12 @@ void IMU_Init_HW_Tap(void)
 	
 	// Single and double tap enabled (SINGLE_DOUBLE_TAP = 1)
 	readRegister(&data, LSM6DS3_ACC_GYRO_WAKE_UP_THS);
-	data |= SINGLE_DOUBLE_TAP;
+	data |= 0; //SINGLE_DOUBLE_TAP;
 	errorAccumulator += writeRegister( LSM6DS3_ACC_GYRO_WAKE_UP_THS, data );
 	
 	// Single and double tap interrupt driven to INT1 pin -- enable latch
 	readRegister(&data, LSM6DS3_ACC_GYRO_MD1_CFG);
-	data |= INT1_SINGLE_TAP;// | INT1_DOUBLE_TAP;
+	data |= INT1_SINGLE_TAP | INT1_DOUBLE_TAP;
 	errorAccumulator += writeRegister( LSM6DS3_ACC_GYRO_MD1_CFG, data );
 }
 

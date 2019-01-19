@@ -888,24 +888,6 @@ int main(void)
     buttons_leds_init(&erase_bonds);
 		/******************* Initialize I2C interface *******************/
 		I2C_Init(SCL_PIN, SDA_PIN);
-		
-		ret_code_t err_code;
-
-    err_code = nrf_drv_gpiote_init();
-    APP_ERROR_CHECK(err_code);
-		
-		nrf_drv_gpiote_in_config_t in_config = GPIOTE_CONFIG_IN_SENSE_LOTOHI(true);
-    in_config.pull = NRF_GPIO_PIN_PULLUP;
-
-    err_code = nrf_drv_gpiote_in_init(PIN_INT_1, &in_config, int_1_handler);
-    APP_ERROR_CHECK(err_code);
-		err_code = nrf_drv_gpiote_in_init(PIN_INT_2, &in_config, int_2_handler);
-    APP_ERROR_CHECK(err_code);
-
-    nrf_drv_gpiote_in_event_enable(PIN_INT_1, true);
-		nrf_drv_gpiote_in_event_enable(PIN_INT_2, true);
-   
-		
 		NRF_LOG_INFO("TWI init... DONE!");
 		
     gap_params_init();
@@ -928,6 +910,21 @@ int main(void)
     
 //		IMU_Init_Pedo();
 
+		ret_code_t err_code;
+
+    err_code = nrf_drv_gpiote_init();
+    APP_ERROR_CHECK(err_code);
+		
+		nrf_drv_gpiote_in_config_t in_config = GPIOTE_CONFIG_IN_SENSE_LOTOHI(true);
+    in_config.pull = NRF_GPIO_PIN_PULLUP;
+
+    err_code = nrf_drv_gpiote_in_init(PIN_INT_1, &in_config, int_1_handler);
+    APP_ERROR_CHECK(err_code);
+		err_code = nrf_drv_gpiote_in_init(PIN_INT_2, &in_config, int_2_handler);
+    APP_ERROR_CHECK(err_code);
+
+    nrf_drv_gpiote_in_event_enable(PIN_INT_1, true);
+		nrf_drv_gpiote_in_event_enable(PIN_INT_2, true);
 
 		
 		NRF_LOG_INFO("DONE!\r\n");
@@ -943,7 +940,7 @@ int main(void)
 
 		
 
-  	UNUSED_VARIABLE(xTaskCreate(temperature_task_function, "TMPT", 256, NULL, 3, &temperature_task_handle));
+  	  UNUSED_VARIABLE(xTaskCreate(temperature_task_function, "TMPT", 256, NULL, 3, &temperature_task_handle));
 //		UNUSED_VARIABLE(xTaskCreate(accel_task_function, "ACCEL", 256, NULL, 3, &accel_task_handle));
 //		UNUSED_VARIABLE(xTaskCreate(pedo_task_function, "pedo", configMINIMAL_STACK_SIZE, NULL, 3, &pedo_task_handle));
 
