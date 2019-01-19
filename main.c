@@ -768,7 +768,11 @@ static void pedo_task_function (void * pvParameter)
 		SEGGER_RTT_WriteString(0, "Steps taken: ");
 		SEGGER_RTT_printf(0, "%d\r\n", steps);
 		
-		printf("Steps taken: %d\r\n", steps);
+		if(bt_connected)
+		{
+			printf("Steps taken: %d\r\n", steps);
+		}
+		
 		
 		/* Delay a task for a given number of ticks */
 		vTaskDelay(APP_TIMER_TICKS(PEDO_TASK_DELAY));
@@ -830,10 +834,11 @@ static void accel_task_function (void * pvParameter)
 		SEGGER_RTT_printf(0, "%d", steps_taken);
 		SEGGER_RTT_WriteString(0, "\r\n");
 		
-		printf("Total acceleration: %.2f ", total - average_accel);
+		
 		
 		if(bt_connected)
 		{
+			printf("Total acceleration:  %.2f\r\n", total - average_accel);
 			printf("Steps: %d\r\n", steps_taken);
 		}
 
@@ -902,9 +907,9 @@ int main(void)
 
 		
 
-  	UNUSED_VARIABLE(xTaskCreate(temperature_task_function, "TMPT", 256, NULL, 3, &temperature_task_handle));
-		//UNUSED_VARIABLE(xTaskCreate(accel_task_function, "ACCEL", 68, NULL, 3, &accel_task_handle));
-		//UNUSED_VARIABLE(xTaskCreate(pedo_task_function, "pedo", configMINIMAL_STACK_SIZE, NULL, 2, &pedo_task_handle));
+  	//UNUSED_VARIABLE(xTaskCreate(temperature_task_function, "TMPT", 256, NULL, 3, &temperature_task_handle));
+		UNUSED_VARIABLE(xTaskCreate(accel_task_function, "ACCEL", 256, NULL, 3, &accel_task_handle));
+		//UNUSED_VARIABLE(xTaskCreate(pedo_task_function, "pedo", configMINIMAL_STACK_SIZE, NULL, 3, &pedo_task_handle));
 
     
 		// Create a FreeRTOS task for the BLE stack.
