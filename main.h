@@ -38,18 +38,14 @@
 #include "nrf_log_default_backends.h"
 
 #include "ble_nus.h"
-#include "app_uart.h"
 #include "app_timer.h"
 
-#include "SEGGER_RTT.h"
-#include "I2C.h"
-#include "IMU.h"
-#include "pedometer.h"
-#include "SparkFunLSM6DS3.h"
+
 #include "pin_definitions.h"
 #include "addresses.h"
 #include "configuration.h"
 #include "utilities.h"
+#include "IMU_interrupts.h"
 
 /* FreeRTOS */
 #include "FreeRTOS.h"
@@ -61,22 +57,10 @@
 #include "task_CMD.h"
 #include "task_BLE.h"
 #include "task_LOG.h"
-
-#if defined (UART_PRESENT)
-#include "nrf_uart.h"
-#endif
-#if defined (UARTE_PRESENT)
-#include "nrf_uarte.h"
-#endif
-
-                                  /**< Maximum encryption key size. */
-
-#define DEAD_BEEF                           0xDEADBEEF                              /**< Value used as error code on stack dump, can be used to identify stack location on stack unwind. */
+#include "task_IMU.h"
 
 #define OSTIMER_WAIT_FOR_QUEUE              2                                       /**< Number of ticks to wait for the timer queue to be ready */
 
-#define UART_TX_BUF_SIZE                256  /**< UART TX buffer size. */
-#define UART_RX_BUF_SIZE                256  /**< UART RX buffer size. */
 
 //FreeRTOS custom defines 
 #define TASK_PRIO_HIGH			5

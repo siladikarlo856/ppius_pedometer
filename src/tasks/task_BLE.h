@@ -83,8 +83,10 @@
 #define SEC_PARAM_IO_CAPABILITIES           BLE_GAP_IO_CAPS_NONE                    /**< No I/O capabilities. */
 #define SEC_PARAM_OOB                       0                                       /**< Out Of Band data not available. */
 #define SEC_PARAM_MIN_KEY_SIZE              7                                       /**< Minimum encryption key size. */
-#define SEC_PARAM_MAX_KEY_SIZE              16    
+#define SEC_PARAM_MAX_KEY_SIZE              16    																	/**< Maximum encryption key size. */
 
-void task_ble_init(bool * p_erase_bonds);
+#define DEAD_BEEF                           0xDEADBEEF  /**< Value used as error code on stack dump, can be used to identify stack location on stack unwind. */
+
+void Task_BLE_Init();
 
 #endif //__TASK_BLE_H__

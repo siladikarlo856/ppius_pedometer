@@ -457,6 +457,16 @@
               <FileType>5</FileType>
               <FilePath>..\..\..\src\cmd\cmd.h</FilePath>
             </File>
+            <File>
+              <FileName>IMU_interrupts.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\src\IMU\IMU_interrupts.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMU_interrupts.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\src\IMU\IMU_interrupts.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -491,6 +501,26 @@
               <FileName>task_LOG.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\..\src\tasks\task_LOG.h</FilePath>
+            </File>
+            <File>
+              <FileName>task_IMU.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\src\tasks\task_IMU.c</FilePath>
+            </File>
+            <File>
+              <FileName>task_IMU.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\src\tasks\task_IMU.h</FilePath>
+            </File>
+            <File>
+              <FileName>task_UART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\src\tasks\task_UART.c</FilePath>
+            </File>
+            <File>
+              <FileName>task_UART.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\src\tasks\task_UART.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -5528,6 +5558,16 @@
               <FileType>5</FileType>
               <FilePath>..\..\..\src\cmd\cmd.h</FilePath>
             </File>
+            <File>
+              <FileName>IMU_interrupts.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\src\IMU\IMU_interrupts.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMU_interrupts.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\src\IMU\IMU_interrupts.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -5562,6 +5602,26 @@
               <FileName>task_LOG.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\..\src\tasks\task_LOG.h</FilePath>
+            </File>
+            <File>
+              <FileName>task_IMU.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\src\tasks\task_IMU.c</FilePath>
+            </File>
+            <File>
+              <FileName>task_IMU.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\src\tasks\task_IMU.h</FilePath>
+            </File>
+            <File>
+              <FileName>task_UART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\src\tasks\task_UART.c</FilePath>
+            </File>
+            <File>
+              <FileName>task_UART.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\src\tasks\task_UART.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -27,6 +27,22 @@ static ble_uuid_t m_adv_uuids[]          =                                      
 static void advertising_start(void * p_erase_bonds);
 
 
+/**@brief Callback function for asserts in the SoftDevice.
+ *
+ * @details This function will be called in case of an assert in the SoftDevice.
+ *
+ * @warning This handler is an example only and does not fit a final product. You need to analyze
+ *          how your product is supposed to react in case of Assert.
+ * @warning On assert from the SoftDevice, the system can only recover on reset.
+ *
+ * @param[in]   line_num   Line number of the failing ASSERT call.
+ * @param[in]   file_name  File name of the failing ASSERT call.
+ */
+void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
+{
+    app_error_handler(DEAD_BEEF, line_num, p_file_name);
+}
+
 
 /**@brief Function for handling Peer Manager events.
  *
@@ -539,7 +555,7 @@ uint32_t nus_printf_callback(char p_char)
  *
  * @return      None.
  ******************************************************************************/
-void task_ble_init(bool *p_erase_bonds)
+void Task_BLE_Init()
 {
 	NRF_LOG_INFO("Task BLE init");
 	NRF_LOG_FLUSH();
@@ -555,5 +571,5 @@ void task_ble_init(bool *p_erase_bonds)
 	
 	// Create a FreeRTOS task for the BLE stack.
   // The task will run advertising_start() before entering its loop.
-  nrf_sdh_freertos_init(advertising_start, p_erase_bonds);
+  nrf_sdh_freertos_init(advertising_start, NULL);
 }
