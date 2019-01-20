@@ -472,6 +472,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\src\tasks\task_CMD.c</FilePath>
             </File>
+            <File>
+              <FileName>task_BLE.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\src\tasks\task_BLE.c</FilePath>
+            </File>
+            <File>
+              <FileName>task_BLE.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\src\tasks\task_BLE.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -5522,6 +5532,16 @@
               <FileName>task_CMD.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\src\tasks\task_CMD.c</FilePath>
+            </File>
+            <File>
+              <FileName>task_BLE.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\src\tasks\task_BLE.c</FilePath>
+            </File>
+            <File>
+              <FileName>task_BLE.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\src\tasks\task_BLE.h</FilePath>
             </File>
           </Files>
         </Group>
