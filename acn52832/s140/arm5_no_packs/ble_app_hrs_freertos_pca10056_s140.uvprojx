@@ -463,14 +463,14 @@
           <GroupName>Tasks</GroupName>
           <Files>
             <File>
-              <FileName>task_CMD.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\src\tasks\task_CMD.h</FilePath>
-            </File>
-            <File>
               <FileName>task_CMD.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\src\tasks\task_CMD.c</FilePath>
+            </File>
+            <File>
+              <FileName>task_CMD.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\src\tasks\task_CMD.h</FilePath>
             </File>
             <File>
               <FileName>task_BLE.c</FileName>
@@ -481,6 +481,16 @@
               <FileName>task_BLE.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\..\src\tasks\task_BLE.h</FilePath>
+            </File>
+            <File>
+              <FileName>task_LOG.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\src\tasks\task_LOG.c</FilePath>
+            </File>
+            <File>
+              <FileName>task_LOG.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\src\tasks\task_LOG.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -5524,14 +5534,14 @@
           <GroupName>Tasks</GroupName>
           <Files>
             <File>
-              <FileName>task_CMD.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\src\tasks\task_CMD.h</FilePath>
-            </File>
-            <File>
               <FileName>task_CMD.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\src\tasks\task_CMD.c</FilePath>
+            </File>
+            <File>
+              <FileName>task_CMD.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\src\tasks\task_CMD.h</FilePath>
             </File>
             <File>
               <FileName>task_BLE.c</FileName>
@@ -5542,6 +5552,16 @@
               <FileName>task_BLE.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\..\src\tasks\task_BLE.h</FilePath>
+            </File>
+            <File>
+              <FileName>task_LOG.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\src\tasks\task_LOG.c</FilePath>
+            </File>
+            <File>
+              <FileName>task_LOG.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\src\tasks\task_LOG.h</FilePath>
             </File>
           </Files>
         </Group>

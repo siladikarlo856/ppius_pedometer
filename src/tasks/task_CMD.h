@@ -3,7 +3,7 @@
  *
  * @brief       API to CMD task.
  *
- * @author			Jurica Martincevic (FER)
+ * @author			(FER)
  *
  * @year				2018.
  ******************************************************************************/

@@ -2,11 +2,6 @@
 
 extern bool bt_connected;
 
-#if NRF_LOG_ENABLED
-static TaskHandle_t m_logger_thread;                                /**< Definition of Logger thread. */
-#endif
-
-TimerHandle_t led_toggle_timer_handle;  /**< Reference to LED1 toggling FreeRTOS timer. */
 TaskHandle_t temperature_task_handle;
 TaskHandle_t accel_task_handle;
 TaskHandle_t pedo_task_handle;
@@ -40,16 +35,6 @@ static void timers_init(void)
     APP_ERROR_CHECK(err_code);
 }
 
-/**@brief Function for initializing the nrf log module.
- */
-static void log_init(void)
-{
-    ret_code_t err_code = NRF_LOG_INIT(NULL);
-    APP_ERROR_CHECK(err_code);
-
-    NRF_LOG_DEFAULT_BACKENDS_INIT();
-}
-
 /**@brief Function for initializing buttons and leds.
  *
  * @param[out] p_erase_bonds  Will be true if the clear bonding button was pressed to wake the application up.
@@ -66,30 +51,8 @@ static void buttons_leds_init(bool * p_erase_bonds)
 }
 
 #if NRF_LOG_ENABLED
-/**@brief Thread for handling the logger.
- *
- * @details This thread is responsible for processing log entries if logs are deferred.
- *          Thread flushes all log entries and suspends. It is resumed by idle task hook.
- *
- * @param[in]   arg   Pointer used for passing some arbitrary information (context) from the
- *                    osThreadCreate() call to the thread.
- */
-static void logger_thread(void * arg)
-{
-    UNUSED_PARAMETER(arg);
-
-    while (1)
-    {
-        NRF_LOG_FLUSH();
-
-        vTaskSuspend(NULL); // Suspend myself
-    }
-}
-#endif //NRF_LOG_ENABLED
-
-/**@brief A function which is hooked to idle task.
- * @note Idle hook must be enabled in FreeRTOS configuration (configUSE_IDLE_HOOK).
- */
+extern TaskHandle_t m_logger_thread;
+#endif
 void vApplicationIdleHook( void )
 {
 #if NRF_LOG_ENABLED
@@ -298,26 +261,16 @@ int main(void)
     bool erase_bonds;
 
     // Initialize modules.
-    log_init();
     clock_init();
-
-    // Do not start any interrupt that uses system functions before system initialisation.
-    // The best solution is to start the OS before any other initalisation.
-
-#if NRF_LOG_ENABLED
-    // Start execution.
-    if (pdPASS != xTaskCreate(logger_thread, "LOGGER", 256, NULL, 1, &m_logger_thread))
-    {
-        APP_ERROR_HANDLER(NRF_ERROR_NO_MEM);
-    }
-#endif
-
+		Task_LOG_Init();
+			
     // Activate deep sleep mode.
     SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
 
     // Initialize modules.
     timers_init();
     buttons_leds_init(&erase_bonds);
+		// The best solution is to start the OS before any other initalisation.
 		/******************* Initialize BLE *******************/
 		/**
 		* this task must be initialized  early because it initializes softdevice whos

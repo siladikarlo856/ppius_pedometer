@@ -60,6 +60,7 @@
 /* tasks */
 #include "task_CMD.h"
 #include "task_BLE.h"
+#include "task_LOG.h"
 
 #if defined (UART_PRESENT)
 #include "nrf_uart.h"
