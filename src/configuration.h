@@ -13,7 +13,7 @@
 
 // TASK DELAY CONFIGURATION
 #define WHOAMI_TASK_DELAY 			1000
-#define TEMPERATURE_TASK_DELAY 	500
+#define TEMPERATURE_TASK_DELAY 	5000
 #define ACCEL_TASK_DELAY 				50
 #define PEDO_TASK_DELAY 				1000
 
@@ -22,5 +22,6 @@ const static temperature_units DEFAULT_TEMP_UNIT = CELSIUS;	// Temperature unit:
 
 #define MAX_SCREEN_NUMBER 3
 
+#define BLE_TERMINAL_DEBUG
 
 #endif

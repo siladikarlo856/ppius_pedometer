@@ -25,10 +25,6 @@
 #include "peer_manager.h"
 #include "peer_manager_handler.h"
 #include "bsp_btn_ble.h"
-#include "FreeRTOS.h"
-#include "task.h"
-#include "timers.h"
-#include "semphr.h"
 #include "fds.h"
 #include "ble_conn_state.h"
 #include "nrf_drv_clock.h"
@@ -55,6 +51,14 @@
 #include "configuration.h"
 #include "utilities.h"
 
+/* FreeRTOS */
+#include "FreeRTOS.h"
+#include "task.h"
+#include "timers.h"
+#include "semphr.h"
+
+/* tasks */
+#include "task_CMD.h"
 
 #if defined (UART_PRESENT)
 #include "nrf_uart.h"
@@ -96,11 +100,16 @@
 
 #define OSTIMER_WAIT_FOR_QUEUE              2                                       /**< Number of ticks to wait for the timer queue to be ready */
 
-#define UART_TX_BUF_SIZE                256                                         /**< UART TX buffer size. */
-#define UART_RX_BUF_SIZE                256                                         /**< UART RX buffer size. */
+#define UART_TX_BUF_SIZE                256  /**< UART TX buffer size. */
+#define UART_RX_BUF_SIZE                256  /**< UART RX buffer size. */
 
-//.scl                = 12,
-//       .sda                = 11,
-			 
-			 
+//FreeRTOS custom defines 
+#define TASK_PRIO_HIGH			5
+#define TASK_PRIO_NORMAL		4
+#define TASK_PRIO_LOW				3
+
+/* this defines are used for freertos semaphores and mutexes */
+#define FREERTOS_SEMAPHORE_WAIT_LONG			1000
+#define FREERTOS_SEMAPHORE_WAIT_SHORT			100
+
 #endif //__MAIN_H_

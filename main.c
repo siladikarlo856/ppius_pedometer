@@ -642,6 +642,9 @@ static void nrf_qwr_error_handler(uint32_t nrf_error)
     APP_ERROR_HANDLER(nrf_error);
 }
 
+
+extern QueueHandle_t cmd_queue;
+
 /**@brief Function for handling the data from the Nordic UART Service.
  *
  * @details This function will process the data received from the Nordic UART BLE Service and send
@@ -652,30 +655,15 @@ static void nrf_qwr_error_handler(uint32_t nrf_error)
 /**@snippet [Handling the data received over BLE] */
 static void nus_data_handler(ble_nus_evt_t * p_evt)
 {
-
+	char null_char = '\0';
+	
     if (p_evt->type == BLE_NUS_EVT_RX_DATA)
     {
-        uint32_t err_code;
-
-        NRF_LOG_DEBUG("Received data from BLE NUS. Writing data on UART.");
-        NRF_LOG_HEXDUMP_DEBUG(p_evt->params.rx_data.p_data, p_evt->params.rx_data.length);
-
         for (uint32_t i = 0; i < p_evt->params.rx_data.length; i++)
         {
-            do
-            {
-                err_code = app_uart_put(p_evt->params.rx_data.p_data[i]);
-                if ((err_code != NRF_SUCCESS) && (err_code != NRF_ERROR_BUSY))
-                {
-                    NRF_LOG_ERROR("Failed receiving NUS message. Error 0x%x. ", err_code);
-                    APP_ERROR_CHECK(err_code);
-                }
-            } while (err_code == NRF_ERROR_BUSY);
+					xQueueSendFromISR(cmd_queue, (uint8_t*)&p_evt->params.rx_data.p_data[i], NULL);
         }
-        if (p_evt->params.rx_data.p_data[p_evt->params.rx_data.length - 1] == '\r')
-        {
-            while (app_uart_put('\n') == NRF_ERROR_BUSY);
-        }
+				xQueueSendFromISR(cmd_queue, (uint8_t*)&null_char, NULL);
     }
 
 }
@@ -932,14 +920,9 @@ int main(void)
 		calibrate_IMU();
 		NRF_LOG_INFO("DONE!\r\n");
 		
-	
-//		uint8_t data;
-//		data = I2C_Read(IMU_I2C_ADDRESS, LSM6DS3_ACC_GYRO_WHO_AM_I_REG);
-//		NRF_LOG_INFO("IMU sensor address is: ");
-//		NRF_LOG_INFO("0x%x\r\n", data);
-
 		
-
+		Task_CMD_Init();
+		
   	  UNUSED_VARIABLE(xTaskCreate(temperature_task_function, "TMPT", 256, NULL, 3, &temperature_task_handle));
 //		UNUSED_VARIABLE(xTaskCreate(accel_task_function, "ACCEL", 256, NULL, 3, &accel_task_handle));
 //		UNUSED_VARIABLE(xTaskCreate(pedo_task_function, "pedo", configMINIMAL_STACK_SIZE, NULL, 3, &pedo_task_handle));
