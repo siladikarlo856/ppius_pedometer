@@ -21,5 +21,6 @@
 const static temperature_units DEFAULT_TEMP_UNIT = CELSIUS;	// Temperature unit: CELSIUS or FARENHEIT
 
 #define BLE_TERMINAL_DEBUG
+#define USE_UART
 
 #endif

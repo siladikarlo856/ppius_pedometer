@@ -32,4 +32,6 @@
  
 void setFormat(char *chr, myTime clock);
 
+void Task_CLK_Init(void);
+
 #endif //__TASK_CLK_H__

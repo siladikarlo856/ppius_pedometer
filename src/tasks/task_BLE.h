@@ -87,6 +87,6 @@
 
 #define DEAD_BEEF                           0xDEADBEEF  /**< Value used as error code on stack dump, can be used to identify stack location on stack unwind. */
 
-void Task_BLE_Init();
+void Task_BLE_Init(void);
 
 #endif //__TASK_BLE_H__
