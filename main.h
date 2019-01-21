@@ -58,6 +58,7 @@
 #include "task_BLE.h"
 #include "task_LOG.h"
 #include "task_IMU.h"
+#include "task_CLK.h"
 
 #define OSTIMER_WAIT_FOR_QUEUE              2                                       /**< Number of ticks to wait for the timer queue to be ready */
 
