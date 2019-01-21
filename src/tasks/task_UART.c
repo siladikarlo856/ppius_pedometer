@@ -1,3 +1,4 @@
+#ifdef USE_UART
 #include "task_UART.h"
 
 /**@brief   Function for handling app_uart events.
@@ -62,3 +63,5 @@ static void uart_init(void)
                        err_code);
     APP_ERROR_CHECK(err_code);
 }
+
+#endif

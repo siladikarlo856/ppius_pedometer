@@ -37,11 +37,12 @@ int main(void)
 		* functions are used by all other tasks. It also initializes BLE for
 		* bluetooth communication witch is used for sending commands to sensor.
 		*/
-		Task_BLE_Init();
-		Task_CMD_Init();
-		Task_IMU_Init();
+//		Task_BLE_Init();
+//		Task_CMD_Init();
+//		Task_IMU_Init();
 			
-		IMU_Interrupts_Init();
+//		IMU_Interrupts_Init();
+			Task_CLK_Init();
 	
     NRF_LOG_INFO("HRS FreeRTOS example started.");
 	 

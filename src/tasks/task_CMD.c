@@ -1,7 +1,7 @@
 /*******************************************************************************
  * @file 				task_CMD.c
  *
- * @brief       Implementation of CMD task, thistask runs commands received
+ * @brief       Implementation of CMD task, this task runs commands received
  *							from bluetooth.
  *
  * @author			

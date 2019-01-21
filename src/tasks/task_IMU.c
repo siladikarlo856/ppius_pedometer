@@ -1,9 +1,9 @@
 /*******************************************************************************
- * @file 				task_CMD.c
+ * @file 				task_IMU.c
  *
- * @brief       Implementation of IMU task
+ * @brief       Implementation of IMU task.
  *
- * @author			
+ * @author			(FER)
  *
  * @year				2019.
  ******************************************************************************/
@@ -135,7 +135,16 @@ void Task_IMU_Init(void)
 		calibrate_IMU();
 		NRF_LOG_INFO("DONE!\r\n");
 	
-		 UNUSED_VARIABLE(xTaskCreate(temperature_task_function, "TMPT", 256, NULL, 3, &temperature_task_handle));
-//     UNUSED_VARIABLE(xTaskCreate(accel_task_function, "ACCEL", 256, NULL, 3, &accel_task_handle));
-//     UNUSED_VARIABLE(xTaskCreate(pedo_task_function, "pedo", configMINIMAL_STACK_SIZE, NULL, 3, &pedo_task_handle));
+		if (pdPASS != xTaskCreate(temperature_task_function, "TMPT", 256, NULL, 3, &temperature_task_handle))
+		{
+			APP_ERROR_HANDLER(NRF_ERROR_NO_MEM);
+		}
+		if (pdPASS != xTaskCreate(accel_task_function, "ACCEL", 256, NULL, 3, &accel_task_handle))
+		{
+			APP_ERROR_HANDLER(NRF_ERROR_NO_MEM);
+		}
+		if (pdPASS != xTaskCreate(pedo_task_function, "PEDO", configMINIMAL_STACK_SIZE, NULL, 3, &pedo_task_handle))
+		{
+			APP_ERROR_HANDLER(NRF_ERROR_NO_MEM);
+		}
 }
