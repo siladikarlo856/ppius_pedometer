@@ -12,15 +12,13 @@
 #define NUMBER_OF_SCREENS 4		// Number of screens on the watch
 
 // TASK DELAY CONFIGURATION
-#define WHOAMI_TASK_DELAY 			1000
 #define TEMPERATURE_TASK_DELAY 	5000
 #define ACCEL_TASK_DELAY 				50
 #define PEDO_TASK_DELAY 				1000
+#define SCREEN_TASK_DELAY				1000
 
 // UNITS CONFIGURATION
 const static temperature_units DEFAULT_TEMP_UNIT = CELSIUS;	// Temperature unit: CELSIUS or FARENHEIT
-
-#define MAX_SCREEN_NUMBER 3
 
 #define BLE_TERMINAL_DEBUG
 

@@ -522,6 +522,26 @@
               <FileType>5</FileType>
               <FilePath>..\..\..\src\tasks\task_UART.h</FilePath>
             </File>
+            <File>
+              <FileName>task_SCR.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\task_SCR.c</FilePath>
+            </File>
+            <File>
+              <FileName>task_SCR.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\task_SCR.h</FilePath>
+            </File>
+            <File>
+              <FileName>task_CLK.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\src\tasks\task_CLK.c</FilePath>
+            </File>
+            <File>
+              <FileName>task_CLK.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\src\tasks\task_CLK.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -5622,6 +5642,26 @@
               <FileName>task_UART.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\..\src\tasks\task_UART.h</FilePath>
+            </File>
+            <File>
+              <FileName>task_SCR.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\task_SCR.c</FilePath>
+            </File>
+            <File>
+              <FileName>task_SCR.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\task_SCR.h</FilePath>
+            </File>
+            <File>
+              <FileName>task_CLK.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\src\tasks\task_CLK.c</FilePath>
+            </File>
+            <File>
+              <FileName>task_CLK.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\src\tasks\task_CLK.h</FilePath>
             </File>
           </Files>
         </Group>
