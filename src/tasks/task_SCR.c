@@ -39,6 +39,7 @@ static void screen_task_function (void * pvParameter)
 	
 	while (true)
 	{
+		
 		vTaskSuspendAll();
 		{
 			steps = steps_taken;
@@ -47,6 +48,7 @@ static void screen_task_function (void * pvParameter)
 			setFormat(tmp_clock_string, myClock);
 		}
 		xTaskResumeAll();
+		
 		
 		NRF_LOG_INFO("Screen id: %d", screen_id);
 		

@@ -22,7 +22,7 @@ static uint8_t send_data[2];
 #define TWI_INSTANCE_ID     1
 #endif
 
-static const nrf_drv_twi_t	twi_instance = NRF_DRV_TWI_INSTANCE(TWI_INSTANCE_ID);
+const nrf_drv_twi_t	twi_instance = NRF_DRV_TWI_INSTANCE(TWI_INSTANCE_ID);
 static volatile bool twi_xfer_done = false;
 
 /*******************************************************************************

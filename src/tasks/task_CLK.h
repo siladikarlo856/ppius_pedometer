@@ -33,5 +33,7 @@
 void setFormat(char *chr, myTime clock);
 
 void Task_CLK_Init(void);
+void updateTime();
+void split(char * line);
 
 #endif //__TASK_CLK_H__

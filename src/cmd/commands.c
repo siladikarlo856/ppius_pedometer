@@ -38,7 +38,6 @@
 #include "timers.h"
 #include "semphr.h"
 
-
 #include "cmd.h"
 
 #include "nrf_sdh.h"
@@ -50,7 +49,7 @@
 #include "nrf_pwr_mgmt.h"
 #include "ble_dfu.h"
 
-
+#include "task_CLK.h"
 
 /* bsp */
 #include "I2C.h"
@@ -64,7 +63,7 @@ cmd_ret_code_e cmd_Set_Time( uint8_t arg_cnt, uint8_t **args)
 {
 	if(arg_cnt == 1)
 	{
-	  printf("Sat: %s",(char*)args[0]);
+		split((char*)args[0]);
 		return CMD_OK;
 	}
 	else 

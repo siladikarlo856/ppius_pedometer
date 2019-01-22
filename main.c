@@ -24,6 +24,7 @@ static void clock_init(void)
 
 /**@brief Function for application main entry.
  */
+
 int main(void)
 {
     // Initialize modules.
@@ -44,9 +45,9 @@ int main(void)
 		IMU_Interrupts_Init();
 		Task_CLK_Init();
 		Task_SCR_Init();
-	
+		
     NRF_LOG_INFO("HRS FreeRTOS example started.");
-	 
+		
 		// Activate deep sleep mode.
     SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
     // Start FreeRTOS scheduler.
