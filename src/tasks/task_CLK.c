@@ -26,6 +26,8 @@ void clock_increment_timer_callback (void * pvParameter)
 	myClock.secs+=1;
 }
 
+char clockString[9];
+
 static void clock_time_function (void * pvParameter)
 {
 	char clockString[9];
@@ -44,8 +46,6 @@ static void clock_time_function (void * pvParameter)
 		}	
 		// Show time
 		setFormat(clockString, myClock);
-		SEGGER_RTT_WriteString(0, clockString);		
-		SEGGER_RTT_WriteString(0, "\r\n");
 		/* Delay a task for a given number of ticks */
 		vTaskDelay(APP_TIMER_TICKS(CLOCK_TASK_DELAY));		
 	}

@@ -9,11 +9,16 @@
  * @year				2019.
  ******************************************************************************/
 #include "task_SCR.h"
+#include "task_CLK.h"
 
 extern bool bt_connected;
 
 TaskHandle_t screen_task_handle;
 
+extern uint16_t steps_taken;
+extern uint8_t screen_number;
+extern float temp;
+extern volatile myTime myClock;
 
 /*******************************************************************************
  * @fn          screen_task_function
@@ -29,28 +34,43 @@ static void screen_task_function (void * pvParameter)
 	UNUSED_PARAMETER(pvParameter);
 	uint16_t steps;
 	int8_t screen_id;
+	float current_temp;
+	char tmp_clock_string[9];
+	
 	while (true)
 	{
+		vTaskSuspendAll();
+		{
+			steps = steps_taken;
+			screen_id = screen_number;
+			current_temp = temp;
+			setFormat(tmp_clock_string, myClock);
+		}
+		xTaskResumeAll();
+		
+		NRF_LOG_INFO("Screen id: %d", screen_id);
 		
 		switch (screen_id)
 		{
 			case SCREEN_OFF:
-			{
-			}
+				
+				break;
 			case SCREEN_CLOCK:
-			{
-				
-			}
+				NRF_LOG_INFO("Clock: %s", tmp_clock_string);
+				break;
+	
 			case SCREEN_STEPS:
-			{
-				
-			}
-			case SCREEN_TEMP:
-			{
-				
-			}
-		}
+				NRF_LOG_INFO("Steps taken: %d", steps);
+				break;
 			
+			case SCREEN_TEMP:
+				NRF_LOG_INFO("Temperature: %d", (int)current_temp);	
+				break;
+		}
+		
+		
+		
+		
 		
 		if(bt_connected)
 		{

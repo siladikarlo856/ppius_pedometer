@@ -2,22 +2,17 @@
 
 // screen number to show on display
 uint8_t screen_number = 0;
-
+uint8_t orientation = 0;
 
 void int_1_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action)
 {
     screen_number++;
 		screen_number%=NUMBER_OF_SCREENS;
-		NRF_LOG_INFO("In1 num: %d", screen_number);
-		NRF_LOG_FLUSH();
 }
 
 void int_2_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action)
 {
-    screen_number++;
-		screen_number%=NUMBER_OF_SCREENS;
-		NRF_LOG_INFO("Int 2 num: %d", screen_number);
-		NRF_LOG_FLUSH();
+    orientation = 1;
 }
 
 void IMU_Interrupts_Init(void)

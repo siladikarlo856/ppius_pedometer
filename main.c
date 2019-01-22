@@ -39,10 +39,11 @@ int main(void)
 		*/
 //		Task_BLE_Init();
 //		Task_CMD_Init();
-//		Task_IMU_Init();
+			Task_IMU_Init();
 			
-//		IMU_Interrupts_Init();
+  		IMU_Interrupts_Init();
 			Task_CLK_Init();
+			Task_SCR_Init();
 	
     NRF_LOG_INFO("HRS FreeRTOS example started.");
 	 

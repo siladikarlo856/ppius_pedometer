@@ -9,7 +9,7 @@
 #define MIN_TIME 500					// minimal time between two consecutive steps
 
 // SCREEN CONFIGURATION
-#define NUMBER_OF_SCREENS 4		// Number of screens on the watch
+#define NUMBER_OF_SCREENS 3		// Number of screens on the watch
 
 // TASK DELAY CONFIGURATION
 #define TEMPERATURE_TASK_DELAY 	5000

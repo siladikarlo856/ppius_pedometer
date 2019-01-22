@@ -39,22 +39,30 @@ static void pedo_task_function (void * pvParameter)
 	}
 }
 
+float temp = 0;
+
 /**@brief temperature read task entry function.
  *
  * @param[in] pvParameter   Pointer that will be used as the parameter for the task.
  */
 static void temperature_task_function (void * pvParameter)
 {
-	float temp = 0;
 	temperature_units temp_unit = DEFAULT_TEMP_UNIT;
 	
 	while (true)
 	{
 		temp = readTemp(temp_unit);
-		SEGGER_RTT_WriteString(0, "Current temperature: ");
-		print_float(temp);
-		if (temp_unit == CELSIUS) {SEGGER_RTT_WriteString(0, " °C\r\n");}
-		else {SEGGER_RTT_WriteString(0, " °F\r\n");}
+		
+		#ifdef DEBUG_RTT
+		if (temp_unit == CELSIUS) 
+		{
+			NRF_LOG_INFO("Current temperature: %d °C",(int)temp);
+		}
+		else 
+		{
+			NRF_LOG_INFO("Current temperature: %d °F",(int)temp);
+		}
+		#endif
 //		xQueueSendToBack(xQueue, &temp, 0);
 		
 		if(bt_connected)
@@ -73,6 +81,10 @@ static void temperature_task_function (void * pvParameter)
 	}
 }
 
+
+/* Shared resource! */
+uint16_t steps_taken = 0;
+
 /**@brief acceleration read task entry function.
  *
  * @param[in] pvParameter   Pointer that will be used as the parameter for the task.
@@ -81,7 +93,6 @@ static void accel_task_function (void * pvParameter)
 {
 	float average_accel;
 	float accel_x, accel_y, accel_z, total;
-	uint16_t steps_taken = 0;
 	uint16_t last_steps_taken = 0;
 	
 	average_accel = get_avg_accel();
@@ -96,16 +107,7 @@ static void accel_task_function (void * pvParameter)
 		{
 			last_steps_taken = steps_taken;
 			steps_taken++;
-			printf("Steps: %d\r\n", steps_taken);
-		}
-			
-		SEGGER_RTT_WriteString(0, "Total acceleration: ");
-		print_float(total - average_accel);
-		SEGGER_RTT_WriteString(0, " --- Steps: ");
-		SEGGER_RTT_printf(0, "%d", steps_taken);
-		SEGGER_RTT_WriteString(0, "\r\n");
-		
-		
+		}		
 		
 		if(bt_connected)
 		{
@@ -143,8 +145,8 @@ void Task_IMU_Init(void)
 		{
 			APP_ERROR_HANDLER(NRF_ERROR_NO_MEM);
 		}
-		if (pdPASS != xTaskCreate(pedo_task_function, "PEDO", configMINIMAL_STACK_SIZE, NULL, 3, &pedo_task_handle))
-		{
-			APP_ERROR_HANDLER(NRF_ERROR_NO_MEM);
-		}
+//		if (pdPASS != xTaskCreate(pedo_task_function, "PEDO", configMINIMAL_STACK_SIZE, NULL, 3, &pedo_task_handle))
+//		{
+//			APP_ERROR_HANDLER(NRF_ERROR_NO_MEM);
+//		}
 }

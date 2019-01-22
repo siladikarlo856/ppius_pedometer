@@ -1113,8 +1113,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\task_SCR.c</PathWithFileName>
-      <FilenameWithoutPath>task_SCR.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\src\tasks\task_CLK.c</PathWithFileName>
+      <FilenameWithoutPath>task_CLK.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1125,8 +1125,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\task_SCR.h</PathWithFileName>
-      <FilenameWithoutPath>task_SCR.h</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\src\tasks\task_CLK.h</PathWithFileName>
+      <FilenameWithoutPath>task_CLK.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1137,8 +1137,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\src\tasks\task_CLK.c</PathWithFileName>
-      <FilenameWithoutPath>task_CLK.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\src\tasks\task_SCR.c</PathWithFileName>
+      <FilenameWithoutPath>task_SCR.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1149,8 +1149,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\src\tasks\task_CLK.h</PathWithFileName>
-      <FilenameWithoutPath>task_CLK.h</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\src\tasks\task_SCR.h</PathWithFileName>
+      <FilenameWithoutPath>task_SCR.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1210,7 +1210,7 @@
 
   <Group>
     <GroupName>Third Parties</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
