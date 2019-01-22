@@ -25,10 +25,10 @@ cmd_ret_code_e Help( uint8_t arg_cnt, uint8_t **args);
  * external functions, implemented in commands.c file.
  */
 extern cmd_ret_code_e cmd_Set_Time( uint8_t arg_cnt, uint8_t **args);
- 
+extern cmd_ret_code_e cmd_Sys_Rst( uint8_t arg_cnt, uint8_t **args);
 
 
-#define NUMBER_OF_COMMANDS	2
+#define NUMBER_OF_COMMANDS	3
 
 /**
  * in this part commands are registered, to add command add another entry
@@ -48,6 +48,11 @@ static command_t commands[NUMBER_OF_COMMANDS] =
 		.command_string = "help",
 		.command_function = Help,
 		.command_info = "   - displays all commands\r\n"
+	},
+	{
+		.command_string = "sysrst",
+		.command_function = cmd_Sys_Rst,
+		.command_info = "  - resets mcu\r\n"
 	},
 	{
 		.command_string = "set_time",

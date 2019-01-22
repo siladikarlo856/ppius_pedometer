@@ -71,3 +71,10 @@ cmd_ret_code_e cmd_Set_Time( uint8_t arg_cnt, uint8_t **args)
 		return CMD_FEW_PARAM;
 	}
 }
+
+/**< Function witch resets nrf */
+cmd_ret_code_e cmd_Sys_Rst( uint8_t arg_cnt, uint8_t **args)
+{
+	sd_nvic_SystemReset();
+	return CMD_OK;
+}
