@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Component Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'ble_app_hrs_freertos_pca10056_s140' 
+ * Project: 'pedometer' 
  * Target:  'nrf52832_xxaa' 
  */
 
