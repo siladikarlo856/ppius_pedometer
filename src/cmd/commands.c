@@ -50,10 +50,25 @@
 #include "nrf_pwr_mgmt.h"
 #include "ble_dfu.h"
 
+
+
 /* bsp */
 #include "I2C.h"
 
 static float cmdStr2Num(char *str)
 {
     return strtof(str, NULL);
+}
+
+cmd_ret_code_e cmd_Set_Time( uint8_t arg_cnt, uint8_t **args)
+{
+	if(arg_cnt == 1)
+	{
+	  printf("Sat: %s",(char*)args[0]);
+		return CMD_OK;
+	}
+	else 
+	{
+		return CMD_FEW_PARAM;
+	}
 }

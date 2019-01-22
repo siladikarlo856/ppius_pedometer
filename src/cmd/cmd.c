@@ -19,12 +19,16 @@
 /* Uncomment line bellow to see debug logs on BLE terminal */
 //#define BLE_TERMINAL_DEBUG
 
+cmd_ret_code_e Help( uint8_t arg_cnt, uint8_t **args);
+
 /**
  * external functions, implemented in commands.c file.
  */
-cmd_ret_code_e Help( uint8_t arg_cnt, uint8_t **args);
+extern cmd_ret_code_e cmd_Set_Time( uint8_t arg_cnt, uint8_t **args);
+ 
 
-#define NUMBER_OF_COMMANDS	1
+
+#define NUMBER_OF_COMMANDS	2
 
 /**
  * in this part commands are registered, to add command add another entry
@@ -38,12 +42,18 @@ cmd_ret_code_e Help( uint8_t arg_cnt, uint8_t **args);
  * when string "example" is received, function example is executed. Function
  * example must be defined outside and linked vith keyword extern.
  */
-static command_t commands[NUMBER_OF_COMMANDS] = {
+static command_t commands[NUMBER_OF_COMMANDS] = 
+{
 	{
 		.command_string = "help",
 		.command_function = Help,
 		.command_info = "   - displays all commands\r\n"
 	},
+	{
+		.command_string = "set_time",
+		.command_function = cmd_Set_Time,
+		.command_info = "   - set time (hh:mm:ss)\r\n"
+	}
 };
 
 /*******************************************************************************

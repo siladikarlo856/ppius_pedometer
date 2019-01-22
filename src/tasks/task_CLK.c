@@ -26,6 +26,7 @@ void clock_increment_timer_callback (void * pvParameter)
 	myClock.secs+=1;
 }
 
+/* Shared resource! */
 char clockString[9];
 
 static void clock_time_function (void * pvParameter)
@@ -44,8 +45,10 @@ static void clock_time_function (void * pvParameter)
 		if (myClock.hours > 23) {
 			myClock.hours  = 0;
 		}	
+		
 		// Show time
 		setFormat(clockString, myClock);
+		
 		/* Delay a task for a given number of ticks */
 		vTaskDelay(APP_TIMER_TICKS(CLOCK_TASK_DELAY));		
 	}
