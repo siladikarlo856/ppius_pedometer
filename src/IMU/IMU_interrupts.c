@@ -2,7 +2,7 @@
 
 // screen number to show on display
 uint8_t screen_number = 0;
-uint8_t orientation = 0;
+uint8_t tilt = 0;
 
 void int_1_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action)
 {
@@ -12,7 +12,7 @@ void int_1_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action)
 
 void int_2_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action)
 {
-    orientation = 1;
+    tilt = 1;
 }
 
 void IMU_Interrupts_Init(void)

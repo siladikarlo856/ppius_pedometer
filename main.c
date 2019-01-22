@@ -1,9 +1,5 @@
 #include "main.h"
 
-// screen number to show on display
-extern uint8_t screen_number;
-
-
 #if NRF_LOG_ENABLED
 extern TaskHandle_t m_logger_thread;
 #endif
@@ -29,22 +25,15 @@ int main(void)
 {
     // Initialize modules.
     clock_init();
+		// Initialize tasks.
 		Task_LOG_Init();
-		
-		// The best solution is to start the OS before any other initalisation.
-		/******************* Initialize BLE *******************/
-		/**
-		* this task must be initialized  early because it initializes softdevice whos
-		* functions are used by all other tasks. It also initializes BLE for
-		* bluetooth communication witch is used for sending commands to sensor.
-		*/
 		Task_BLE_Init();
 		Task_CMD_Init();
-		Task_IMU_Init();
-		
-		IMU_Interrupts_Init();
 		Task_CLK_Init();
 		Task_SCR_Init();
+		Task_IMU_Init();
+		// Initialize interrupts (gpiote) 
+		IMU_Interrupts_Init();
 		
     NRF_LOG_INFO("HRS FreeRTOS example started.");
 		

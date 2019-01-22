@@ -34,6 +34,7 @@ typedef enum {
 	SCREEN_OFF		= (-1),
 } SCREEN_ID_t;
 
-void Task_IMU_Init(void);
+
+void Task_SCR_Init(void);
 
 #endif //__TASK_SCR_H__

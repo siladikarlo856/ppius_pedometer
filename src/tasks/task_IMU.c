@@ -65,17 +65,6 @@ static void temperature_task_function (void * pvParameter)
 		#endif
 //		xQueueSendToBack(xQueue, &temp, 0);
 		
-		if(bt_connected)
-		{
-			printf("Current temperature: %.2f\r\n", temp);
-		}
-		
-		// TODO remove!!!
-		/**************************************************/
-		uint8_t data;
-		readRegister(&data, LSM6DS3_ACC_GYRO_D6D_SRC);
-    /**************************************************/
-		
 		/* Delay a task for a given number of ticks */
 		vTaskDelay(APP_TIMER_TICKS(TEMPERATURE_TASK_DELAY));
 	}

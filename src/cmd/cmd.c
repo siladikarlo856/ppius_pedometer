@@ -27,7 +27,6 @@ cmd_ret_code_e Help( uint8_t arg_cnt, uint8_t **args);
 extern cmd_ret_code_e cmd_Set_Time( uint8_t arg_cnt, uint8_t **args);
 extern cmd_ret_code_e cmd_Sys_Rst( uint8_t arg_cnt, uint8_t **args);
 
-
 #define NUMBER_OF_COMMANDS	3
 
 /**
